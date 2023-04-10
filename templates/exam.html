@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+Exam 
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+
+ {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container">
+    <h3 style="width:70%; margin:auto;">PLATFORMA</h3>
+    <h3 style="width:70%; margin:auto;">İmtahanlar</h3>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Adı</th>
+        <th scope="col">Statusu</th>
+        <th scope="col">Başlanma tarixi</th>
+        <th scope="col">Müddət</th>
+        <th scope="col">Mənbə</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for exam in exams %}
+        <th scope="row">{{exam.name}}</th>
+        <td>{{exam.status}}</td>
+        <td>{{exam.start_date}}</td>
+        <td>{{exam.duration}}</td>
+        <td>{{exam.file}}</td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

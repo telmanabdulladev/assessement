@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} 
+Index Page
+{% endblock %}
+
+{% block style %}
+<style>
+    .container{
+        align-items:center;
+        margin:auto;
+    }
+   
+    
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="container">
+        <h3 style="width:70%; margin:auto;">PLATFORMA</h3>
+        <h1 style="width:70%; margin:auto;">Salam, {{request.user.first_name}} {{request.user.last_name}} {{request.user.account.father_name}} !</h1>
+        <div class="card" style="width:70%; margin:auto;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Önə Çıxarılmış Materiallar</b></li>
+              {% for resource in resources %}
+              <li class="list-group-item">{{ resource.name }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+    </div>
+{% endblock %} 
