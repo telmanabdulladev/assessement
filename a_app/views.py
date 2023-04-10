@@ -69,10 +69,14 @@ def Logout(request):
     return redirect('/')
         
                    
-@login_required
+# @login_required
+
 def exam(request):
-    exams = Exam.objects.filter(istifadeciler=request.user)
-    context = {'exams': exams}
+    context={}
+    if request.user.is_authenticated:
+        
+      exams = Exam.objects.filter(istifadeciler=request.user)
+      context = {'exams': exams}
     return render(request, 'exam.html', context)
 
     
