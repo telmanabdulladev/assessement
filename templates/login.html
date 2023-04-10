@@ -9,7 +9,7 @@ Login
         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"
             style="color:black;font-weight:bold">Login</div>
         <br>
-        <form class="row g-4" method="POST" action="/login/">
+        <form class="row g-4" method="POST">
           {% csrf_token %}
             <div class="col-md-12">
                 <label for="inputname" class="form-label" style="font-weight: bold;"><i>
@@ -25,4 +25,5 @@ Login
                     class="form-control" id="password" name="password" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 {% endblock %}
