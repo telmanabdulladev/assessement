@@ -52,7 +52,7 @@ def signup(request):
             account=Account.objects.create(istifadeci=user,category=category,father_name=father_name,phone_num=phone_num)
             account.save()
             messages.success(request,'You Logged In')
-            return redirect('a_app:login')
+            return redirect('a_app:index')
             
         else:
             messages.info(request,'Use another username')
