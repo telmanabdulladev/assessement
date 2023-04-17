@@ -7,6 +7,8 @@ Exam
 
 {% endblock %}
 
+{% load duration %}
+
 {% block content %}
 
  {% if messages %}
@@ -35,10 +37,14 @@ Exam
       <tr>
         {% for exam in exams %}
         <th scope="row">{{exam.name}}</th>
-        <td>{{exam.status}}</td>
+        {% if exam.status %}
+        <td>Bitib</td>
+        {% else %}
+        <td>Davam edir</td>
+        {% endif %}
         <td>{{exam.start_date}}</td>
-        <td>{{exam.duration}}</td>
-        <td>{{exam.file}}</td>
+        <td>{{exam.duration | duration}}</td>
+        <td>{{exam.file_type}}</td>
         {% endfor %}
       </tr>
     </tbody>

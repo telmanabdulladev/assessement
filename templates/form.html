@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+Forum
+{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div>
+        <h1>Forumda xoş gördük</h1></h1>
+        <p>Tələbələrin sosial aktivliyi üçün nəzərdə tutulub.</p>
+    </div>
+    <div>
+    <div>
+        <button>Yeni Muzakirə Əlavə Et</button>
+        <button>Bütün müzakirələr</button>
+        <button>Sualım var</button>
+        <button>Məlumatım var</button>
+    </div>
+    
+    <div>
+        <form method="POST">
+         {% csrf_token %}
+         
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3">
+              <label for="content" class="form-label">Content</label>
+              <input type="content" name="content" class="form-control" id="content">
+            </div>
+            <div class="mb-3 form-check">
+                <label for="category">Kateqoriyani secin:</label>
+
+                <select name="category" id="category" class="form-control">
+                  <option value="Q">Sual</option>
+                  <option value="I">Informasiya</option> 
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Form Yarat</button>     
+    </form>
+    </div>
+    </div>
+    
+
+</div>
+    
+{% endblock %}

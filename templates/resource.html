@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Materiallar
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 style="width:70%; margin:auto;">PLATFORMA</h3>
+    <h1 style="width:70%; margin:auto;">Materiallar </h1>
+    <div class="card" style="width:70%; margin:auto;">
+        <ul style="list-style-type: none;">
+            {% for resource in resources %}
+            <li>
+            {{ resource.name }} {{ resource.date }}
+            </li>
+            <hr>
+            {% endfor %}
+        </ul>
+           
+      </div>
+</div>
+{% endblock %}

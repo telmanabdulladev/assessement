@@ -3,15 +3,9 @@
 Sign Up
 {% endblock %}
 {% block content %}
-
-
-
 <div class="container">
-
-
 <form method ='POST'>
     {% csrf_token %}
-
     <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" name= "username" class="form-control" id="username" aria-describedby="emailHelp">
@@ -58,7 +52,7 @@ Sign Up
     
     <div class="mb-3">
       <label for="phone_num" class="form-label">Əlaqə nömrəsi</label>
-      <input type="tel" name= "phone_num" class="form-control" id="phone_num" aria-describedby="emailHelp" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+      <input type="tel" name= "phone_num" class="form-control" id="phone_num" aria-describedby="emailHelp" pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"placeholder="055-306-66-26">
       <div id="emailHelp" class="form-text"></div>
     </div>
     

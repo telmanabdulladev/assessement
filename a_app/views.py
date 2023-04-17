@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, HttpResponse
 from django.contrib.auth.models import User
-from a_app.models import  Resource, Comment, Exam,Form, Account
+from a_app.models import  Resource, Comment, Exam,Forum, Account
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -86,6 +86,49 @@ def exam(request):
       exams = Exam.objects.filter(istifadeciler=request.user)
       context = {'exams': exams}
     return render(request, 'exam.html', context)
+def resource(request):
+    context = {
+        
+    }
+    if request.user.is_authenticated:
+        resources=Resource.objects.filter(istifadeciler=request.user)
+        context = {
+            'resources':resources
+        }
+    return render(request,'resource.html',context)
+def forum(request):
+    context ={
+        
+    }
+    if request.user.is_authenticated:
+        forms=Forum.objects.filter(istifadeci=request.user)
+        
+        context={
+            'forms':forms
+        }
+        if request.method=="POST":
+            title=request.POST.get("title")
+            content=request.POST.get("content")
+            category=request.POST.get("category")
+            
+            
+            Forum.objects.create(
+                title=title,
+                content=content,
+                category=category,
+                istifadeci=request.user
+            )
+            messages.success(request,"form ugurla yaradildi")
+            return redirect("a_app:form")
+            
+            
+            
+            
+            
+        
+    return render(request,'form.html',context)
+
+        
 
     
     

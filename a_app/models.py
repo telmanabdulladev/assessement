@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -51,14 +52,14 @@ class Exam(models.Model):
         return self.name
     
 
-class Form(models.Model):
+class Forum(models.Model):
     CATEGORIES=(
        ('Q','Question'), 
        ('I','Information'),
     )
     title=models.CharField(max_length=256)
     category=models.CharField(max_length=1,choices=CATEGORIES)
-    content=models.TextField()
+    content=RichTextField()
     pub_date=models.DateTimeField(auto_now_add=True)
     istifadeci=models.ForeignKey(User, on_delete=models.CASCADE, related_name='forms')
     
@@ -69,7 +70,7 @@ class Comment(models.Model):
     content=models.TextField()
     pub_date=models.DateTimeField(auto_now_add=True)
     istifadeci=models.ForeignKey(User,on_delete=models.CASCADE, related_name='user_comments')
-    form=models.ForeignKey(Form,on_delete=models.CASCADE, related_name='form_comments')
+    form=models.ForeignKey(Forum,on_delete=models.CASCADE, related_name='form_comments')
     
     def __str__(self):
          return self.name
