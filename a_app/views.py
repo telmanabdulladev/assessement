@@ -119,14 +119,14 @@ def forum(request):
                 istifadeci=request.user
             )
             messages.success(request,"form ugurla yaradildi")
-            return redirect("a_app:form")
+            return redirect("a_app:forum")
             
             
             
             
             
         
-    return render(request,'form.html',context)
+    return render(request,'forum.html',context)
 
         
 
