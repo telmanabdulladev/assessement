@@ -96,6 +96,7 @@ def resource(request):
             'resources':resources
         }
     return render(request,'resource.html',context)
+
 def forum(request):
     context ={
         
@@ -107,19 +108,35 @@ def forum(request):
             'forms':forms
         }
         if request.method=="POST":
-            title=request.POST.get("title")
-            content=request.POST.get("content")
-            category=request.POST.get("category")
+            choice=request.POST.get("choice")
+            if choice=="forum":
+                title=request.POST.get("title")
+                content=request.POST.get("content")
+                category=request.POST.get("category")
+                            
+                Forum.objects.create(
+                   title=title,
+                   content=content,
+                   category=category,
+                   istifadeci=request.user
+                )
+        
+                messages.success(request,"form ugurla yaradildi")
+                return redirect("a_app:forum")
             
-            
-            Forum.objects.create(
-                title=title,
-                content=content,
-                category=category,
-                istifadeci=request.user
-            )
-            messages.success(request,"form ugurla yaradildi")
-            return redirect("a_app:forum")
+            elif choice=="comment":
+                forum_id=request.POST.get("forum_id")
+                comment_content=request.POST.get("comment_content")
+                forum=Forum.objects.get(id=forum_id)
+                
+                Comment.objects.create(
+                    content=comment_content,
+                    istifadeci=request.user,
+                    forum = forum
+                )
+                
+                
+                 
             
             
             
@@ -127,6 +144,8 @@ def forum(request):
             
         
     return render(request,'forum.html',context)
+
+
 
         
 

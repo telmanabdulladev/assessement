@@ -21,20 +21,20 @@ Forum
     <div>
         <form method="POST">
          {% csrf_token %}
-         
-            <div class="mb-3">
+         <input type="hidden" name="choice" value="forum">
+          <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp">
               <div id="emailHelp" class="form-text"></div>
-            </div>
-            <div class="mb-3">
+          </div>
+          <div class="mb-3">
               <label for="content" class="form-label">Content</label>
               <input type="content" name="content" class="form-control" id="content">
-            </div>
-            <div class="mb-3 form-check">
+          </div>
+          <div class="mb-3 form-check">
                 <label for="category">Kateqoriyani secin:</label>
 
-                <select name="category" id="category" class="form-control">
+                 <select name="category" id="category" class="form-control">
                   <option value="Q">Sual</option>
                   <option value="I">Informasiya</option> 
                 </select>
@@ -42,9 +42,57 @@ Forum
             <button type="submit" class="btn btn-primary">Form Yarat</button>     
     </form>
     </div>
-    </div>
-    
+    <hr>
 
-</div>
+    <div class="muzakire">
+      <div class="row">
+        <!--<div class="col-4">
+          <div id="list-example" class="list-group">
+            {% for form in forms %}
+            <a class="list-group-item list-group-item-action" href="#list-item-1">{{form.title}}</a>
+            {% endfor %}
+          </div>
+        </div>-->
+        <div class="col-12">
+          <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+            {% for form in forms %}
+            <h4 id="list-item-1">{{form.title}}</h4>
+
+            <div>
+              <form method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="choice" value="comment">
+               <input type="hidden" name="forum_id" value="{{form.id}}">    
+
+                <div class="mb-3">
+                    <label for="comment_content" class="form-label">Comment</label>
+                    <input type="content" name="comment_content" class="form-control" id="comment_content">
+                </div>
+                  <button type="submit" class="btn btn-primary">Comment Yarat</button>     
+          </form>
+          </div>
+            
+            <ol class="list-group" style="list-style-type:none">
+              {%for comment in form.forum_comments.all%}
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold">{{comment.istifadeci.username}}</div>
+                  {{comment.content}}
+                </div>
+                <span class="badge bg-primary rounded-pill">{{comment.pub_date}}</span>
+              </li> 
+              {%endfor%}          
+            </ol>
+           {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    
+ 
     
 {% endblock %}

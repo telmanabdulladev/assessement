@@ -73,7 +73,7 @@ class Comment(models.Model):
     forum=models.ForeignKey(Forum,on_delete=models.CASCADE, related_name='forum_comments')
     
     def __str__(self):
-         return self.name
+         return self.content
     
 
 
