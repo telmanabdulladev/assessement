@@ -19,6 +19,7 @@ Forum
     </div>
     
     <div>
+      <!--Forum start-->
         <form method="POST">
          {% csrf_token %}
          <input type="hidden" name="choice" value="forum">
@@ -31,7 +32,7 @@ Forum
               <label for="content" class="form-label">Content</label>
               <input type="content" name="content" class="form-control" id="content">
           </div>
-          <div class="mb-3 form-check">
+          <div class="mb-3">
                 <label for="category">Kateqoriyani secin:</label>
 
                  <select name="category" id="category" class="form-control">
@@ -41,6 +42,7 @@ Forum
             </div>
             <button type="submit" class="btn btn-primary">Form Yarat</button>     
     </form>
+    <!--Forum end-->
     </div>
     <hr>
 
@@ -56,20 +58,23 @@ Forum
         <div class="col-12">
           <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
             {% for form in forms %}
-            <h4 id="list-item-1">{{form.title}}</h4>
+            <h4 id="list-item-1">{{form.title}} {{form.content}}</h4>
 
             <div>
+              <!--Komment ucun yaratmisiq-->
               <form method="POST">
                {% csrf_token %}
                <input type="hidden" name="choice" value="comment">
+               <!--Meselen hansisa postu like edirikse onun bu posta aid olduqunu gostermek ucun postun id-ni veririk-->
                <input type="hidden" name="forum_id" value="{{form.id}}">    
 
                 <div class="mb-3">
                     <label for="comment_content" class="form-label">Comment</label>
-                    <input type="content" name="comment_content" class="form-control" id="comment_content">
+                    <input type="text" name="comment_content" class="form-control" id="comment_content">
                 </div>
                   <button type="submit" class="btn btn-primary">Comment Yarat</button>     
           </form>
+          <!--Komment ucun yaratdiqimiz bitdi-->
           </div>
             
             <ol class="list-group" style="list-style-type:none">
@@ -88,11 +93,5 @@ Forum
         </div>
       </div>
     </div>
-  </div>
-
-
-
-    
- 
-    
+  </div>   
 {% endblock %}

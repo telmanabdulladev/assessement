@@ -127,6 +127,7 @@ def forum(request):
             elif choice=="comment":
                 forum_id=request.POST.get("forum_id")
                 comment_content=request.POST.get("comment_content")
+                # id-si forum_id-ye beraber olan forumu Forum classindan cekirik
                 forum=Forum.objects.get(id=forum_id)
                 
                 Comment.objects.create(

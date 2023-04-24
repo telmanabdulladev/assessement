@@ -71,7 +71,7 @@ class Comment(models.Model):
     pub_date=models.DateTimeField(auto_now_add=True)
     istifadeci=models.ForeignKey(User,on_delete=models.CASCADE, related_name='user_comments')
     forum=models.ForeignKey(Forum,on_delete=models.CASCADE, related_name='forum_comments')
-    
+    # forum hem xussiyyetdir hem de hansisa modelin obyektidir
     def __str__(self):
          return self.content
     
