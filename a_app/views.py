@@ -9,10 +9,12 @@ from django.contrib.auth  import authenticate,  login, logout
 # Create your views here.
 
 def index(request):
-    resources=Resource.objects.filter(istifadeciler=request.user)
-    context={
-        'resources': resources
+    context = {
+        
     }
+    if request.user.is_authenticated:
+       resources=Resource.objects.filter(istifadeciler=request.user)
+       context['resources'] = resources
     return render(request, 'index.html',context)
 
 # def exam(request):

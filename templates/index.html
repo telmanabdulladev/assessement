@@ -19,6 +19,7 @@ Index Page
 
 
     <div class="container">
+        {% if request.user.is_authenticated %}
         <h3 style="width:70%; margin:auto;">PLATFORMA</h3>
         <h1 style="width:70%; margin:auto;">Salam, {{request.user.first_name}} {{request.user.last_name}} {{request.user.account.father_name}} !</h1>
         <div class="card" style="width:70%; margin:auto;">
@@ -29,5 +30,10 @@ Index Page
               {% endfor %}
             </ul>
           </div>
+          {% else %}
+          <h1>Zehmet olmasa hesabiniza daxil olun!</h1>
+          <a href="{% url 'a_app:login' %}">Hesabina daxilolun</a>
+          {% endif %}
     </div>
+
 {% endblock %} 
