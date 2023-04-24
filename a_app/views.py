@@ -92,9 +92,7 @@ def resource(request):
     }
     if request.user.is_authenticated:
         resources=Resource.objects.filter(istifadeciler=request.user)
-        context = {
-            'resources':resources
-        }
+        context["resources"] = resources
     return render(request,'resource.html',context)
 
 def forum(request):
@@ -104,9 +102,8 @@ def forum(request):
     if request.user.is_authenticated:
         forms=Forum.objects.filter(istifadeci=request.user)
         
-        context={
-            'forms':forms
-        }
+        context['forms'] = forms
+            
         if request.method=="POST":
             choice=request.POST.get("choice")
             if choice=="forum":
@@ -135,16 +132,20 @@ def forum(request):
                     istifadeci=request.user,
                     forum = forum
                 )
-                
-                
-                 
-            
-            
-            
-            
-            
         
     return render(request,'forum.html',context)
+
+def resource_detail(request,id):
+    context ={
+        
+    }
+    if request.user.is_authenticated:
+        resource=Resource.objects.get(id=id)
+        # dictionary-ya element elave etmek
+        context["resource"] = resource
+    return render(request,'detail.html', context)
+            
+        
 
 
 

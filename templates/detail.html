@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+Detail
+{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h3 style="width:70%; margin:auto;">MATERIALLAR</h3>
+    <h1 style="width:70%; margin:auto;">{{resource.name}}</h1>
+    <div class="card" style="width:70%; margin:auto;">
+        <ul style="list-style-type: none;">
+           
+            <li>
+            <a href="{{ resource.file.url }}">{{resource.file.url}}</a> 
+            </li>
+            <hr>
+           
+        </ul>
+           
+      </div>
+</div>
+
+{% endblock %}
