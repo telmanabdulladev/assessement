@@ -146,6 +146,15 @@ def resource_detail(request,id):
         # dictionary-ya element elave etmek
         context["resource"] = resource
     return render(request,'detail.html', context)
+
+def exam_detail(request,id):
+    context = {
+        
+    }
+    if request.user.is_authenticated:
+        exam=Exam.objects.get(id=id)
+        context["exam"] = exam
+    return render(request,'exam_detail.html',context)
             
         
 

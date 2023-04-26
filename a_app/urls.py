@@ -9,7 +9,8 @@ urlpatterns= [
   path('logout/',views.Logout, name='logout'),
   path('resource/', views.resource, name='resource'),
   path('forum/',views.forum, name='forum'),
-  path('detail/<int:id>/', views.resource_detail, name='resource_detail')
+  path('detail/<int:id>/', views.resource_detail, name='resource_detail'),
+  path('examid/<int:id>/', views.exam_detail,name='exam_detail')
 ]
 
 

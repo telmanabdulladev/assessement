@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+{{exam.name}}
+{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+<div class="container">
+<h1>{{exam.name}}</h1>
+<!-- Data basadaki ve ya modellerdeki her hansi faylin urli-ni yaziriq-->
+<!--<iframe width="800" height="800" src="http://127.0.0.1:8000/media/examfiles/pyton_ders_1.pdf">
+</iframe>-->
+<!--<embed src="{{exam.file.filename}}" type="application/pdf">-->
+<object data="http://127.0.0.1:8000/media/examfiles/pyton_ders_1.pdf" type="application/pdf" width="100%" height="500px">
+ <p><a href="{{exam.file.url}}">Daxil olun</a> <a href="{{exam.file.url}}" download>Yukleyin</a></p>
+</object>
+    
+
+</div>
+{% endblock %}
