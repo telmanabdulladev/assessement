@@ -43,15 +43,15 @@ class Exam(models.Model):
     file=models.FileField(upload_to='examfiles/')
     file_type=models.CharField(max_length=256)
     istifadeciler=models.ManyToManyField(User, related_name='exams')
-   
+    
     class Meta:
         verbose_name='Exam'
         verbose_name_plural='Exams'
         
     def __str__(self):
         return self.name
-    
 
+    
 class Forum(models.Model):
     CATEGORIES=(
        ('Q','Question'), 
@@ -80,9 +80,36 @@ class Comment(models.Model):
 class Question(models.Model):
     exam=models.ForeignKey(Exam,on_delete=models.CASCADE, related_name='questions')
     name=models.CharField(max_length=256)
+    correct_answer=models.CharField(max_length=256,default="")
         
     def __str__(self):
         return self.name
+    
+class Answer(models.Model):
+    answer=models.CharField(max_length=256) 
+    question=models.ForeignKey(Question,on_delete=models.CASCADE, related_name='answers')
+    
+    def __str__(self):
+        return self.answer
+    
+class UserAnswerCard(models.Model):
+    istifadeci=models.ForeignKey(User,on_delete=models.CASCADE, related_name='useranswercards')
+    exam=models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='exam_useranswercards')
+    file=models.FileField(upload_to='answerfiles/')
+    
+    def __str__(self):
+        return self.istifadeci.username
+    
+
+class Result(models.Model):
+    exam=models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='exam_results')
+    istifadeci=models.ForeignKey(User, on_delete=models.CASCADE, related_name='istifadeci_results')
+    duration=models.DurationField(default=0)
+    result=models.FloatField(default=0)
+    
+    def __str__(self):
+        return self.istifadeci.username    
+        
     
     
 

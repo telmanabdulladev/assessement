@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, HttpResponse
 from django.contrib.auth.models import User
-from a_app.models import  Resource, Comment, Exam,Forum, Account
+from a_app.models import  Resource, Comment, Exam,Forum, Account, Answer, UserAnswerCard, Result
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -153,8 +153,17 @@ def exam_detail(request,id):
     }
     if request.user.is_authenticated:
         exam=Exam.objects.get(id=id)
+        # get ile 1 dene, filter ile bir nece , all ile butun obyektleri cekmek olur
+        useranswercard = UserAnswerCard.objects.get(
+            istifadeci=request.user,
+            exam = exam
+        )
+        
         context["exam"] = exam
+        context["useranswercard"] = useranswercard
     return render(request,'exam_detail.html',context)
+
+
             
         
 
