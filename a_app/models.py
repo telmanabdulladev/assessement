@@ -55,12 +55,13 @@ class Exam(models.Model):
 class Forum(models.Model):
     CATEGORIES=(
        ('Q','Question'), 
-       ('I','Information'),
+       ('I','Information')
     )
     title=models.CharField(max_length=256)
     category=models.CharField(max_length=1,choices=CATEGORIES)
     content=RichTextField()
     pub_date=models.DateTimeField(auto_now_add=True)
+    # bir istifadeci birden artiq forum yarada biler, birden artiq forum bir istifadeciye uyqun gelir
     istifadeci=models.ForeignKey(User, on_delete=models.CASCADE, related_name='forums')
     
     def __str__(self):

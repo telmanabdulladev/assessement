@@ -35,6 +35,11 @@ Exam
     </thead>
     <tbody>
       <tr>
+        {% for data in mydata%}
+        <th scope="row">{{data.name}}</th>
+        {% endfor %}
+      </tr>
+      <tr>
         {% for exam in exams %}
         <th scope="row">{{exam.name}}</th>
         {% if exam.status %}

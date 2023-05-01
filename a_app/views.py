@@ -82,15 +82,18 @@ def Logout(request):
 # @login_required
 
 def exam(request):
-    context={}
-    if request.user.is_authenticated:
+    context={
         
+    }
+    if request.user.is_authenticated:
+    #   mydata = Exam.objects.filter(name__startswith='P').values()
+    #   print(mydata)
       exams = Exam.objects.filter(istifadeciler=request.user)
       context = {'exams': exams}
+    #   context["mydata"] = mydata  
     return render(request, 'exam.html', context)
 def resource(request):
-    context = {
-        
+    context = {       
     }
     if request.user.is_authenticated:
         resources=Resource.objects.filter(istifadeciler=request.user)
@@ -98,8 +101,7 @@ def resource(request):
     return render(request,'resource.html',context)
 
 def forum(request):
-    context ={
-        
+    context ={    
     }
     if request.user.is_authenticated:
         forms=Forum.objects.filter(istifadeci=request.user)
@@ -107,12 +109,14 @@ def forum(request):
         context['forms'] = forms
             
         if request.method=="POST":
+            # egr bir form varsa choice yazmaqa ehtiyac yoxdur
             choice=request.POST.get("choice")
             if choice=="forum":
                 title=request.POST.get("title")
                 content=request.POST.get("content")
                 category=request.POST.get("category")
-                            
+                
+                        #yuxaridaki melumatlardan obyekt yaradir asaqidaki kimi
                 Forum.objects.create(
                    title=title,
                    content=content,

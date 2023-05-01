@@ -14,7 +14,8 @@ Materiallar
         <ul style="list-style-type: none;">
             {% for resource in resources %}
             <li>
-            {{ resource.name }} {{ resource.date }}
+                <!--asaqida resource sehifesinden resource detaile linkle kecmisik ve eyi zamanda id-ni de oturmusuk-->
+            <a href="{% url 'a_app:resource_detail' resource.id %}">{{resource.name}} {{resource.date}}</a>
             </li>
             <hr>
             {% endfor %}
