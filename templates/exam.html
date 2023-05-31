@@ -41,7 +41,7 @@ Exam
       </tr>
       <tr>
         {% for exam in exams %}
-        <th scope="row">{{exam.name}}</th>
+        <th scope="row"><a href="{% url 'a_app:exam_detail' exam.id %} " style="text-decoration:none">{{exam.name}}</a></th>
         {% if exam.status %}
         <td>Bitib</td>
         {% else %}

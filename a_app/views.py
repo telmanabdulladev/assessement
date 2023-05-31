@@ -5,6 +5,7 @@ from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth  import authenticate,  login, logout
+from django.http import Http404
 
 # Create your views here.
 
@@ -54,7 +55,7 @@ def signup(request):
             account=Account.objects.create(istifadeci=user,category=category,father_name=father_name,phone_num=phone_num)
             account.save()
             messages.success(request,'You Logged In')
-            return redirect('a_app:index')
+            return redirect('index')
             
         else:
             messages.info(request,'Use another username')
@@ -62,29 +63,31 @@ def signup(request):
 
 def Login(request):
     if request.user.is_authenticated:
-        return redirect('a_app:index')
+        return redirect('index')
     if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']
         user=authenticate(username=username, password=password)
         if user is not None:
             login(request,user)
-            return redirect('a_app:index')
+            return redirect('index')
         else:
             return render(request,'login.html')
     return render(request,'login.html')
 
 def Logout(request):
     logout(request)
-    return redirect('a_app:index')
+    return redirect('index')
         
                    
 # @login_required
 
 def exam(request):
+    if not request.user.is_authenticated:
+        raise Http404
     context={
         
-    }
+     }
     if request.user.is_authenticated:
     #   mydata = Exam.objects.filter(name__startswith='P').values()
     #   print(mydata)
@@ -93,6 +96,8 @@ def exam(request):
     #   context["mydata"] = mydata  
     return render(request, 'exam.html', context)
 def resource(request):
+    if not request.user.is_authenticated:
+        raise Http404
     context = {       
     }
     if request.user.is_authenticated:
@@ -101,6 +106,8 @@ def resource(request):
     return render(request,'resource.html',context)
 
 def forum(request):
+    if not request.user.is_authenticated:
+        raise Http404
     context ={    
     }
     if request.user.is_authenticated:
@@ -142,6 +149,8 @@ def forum(request):
     return render(request,'forum.html',context)
 
 def resource_detail(request,id):
+    if not request.user.is_authenticated:
+        raise Http404
     context ={
         
     }
@@ -152,19 +161,22 @@ def resource_detail(request,id):
     return render(request,'detail.html', context)
 
 def exam_detail(request,id):
-    context = {
-        
+    if not request.user.is_authenticated:
+        raise Http404
+    context = {    
     }
     if request.user.is_authenticated:
         exam=Exam.objects.get(id=id)
         # get ile 1 dene, filter ile bir nece , all ile butun obyektleri cekmek olur
-        useranswercard = UserAnswerCard.objects.get(
-            istifadeci=request.user,
-            exam = exam
-        )
-        
+        # if UserAnswerCard.objects.filter(istifadeci=request.user,exam = exam).exists():
+        if UserAnswerCard.objects.filter(istifadeci=request.user, exam =exam).exists():
+           useranswercard = UserAnswerCard.objects.get(
+           istifadeci=request.user,
+           exam = exam
+           )
+           context["useranswercard"] = useranswercard
         context["exam"] = exam
-        context["useranswercard"] = useranswercard
+        
     return render(request,'exam_detail.html',context)
 
 

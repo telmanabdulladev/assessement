@@ -76,8 +76,7 @@ class Comment(models.Model):
     def __str__(self):
          return self.content
     
-
-
+    
 class Question(models.Model):
     exam=models.ForeignKey(Exam,on_delete=models.CASCADE, related_name='questions')
     name=models.CharField(max_length=256)
@@ -109,7 +108,10 @@ class Result(models.Model):
     result=models.FloatField(default=0)
     
     def __str__(self):
-        return self.istifadeci.username    
+        return self.istifadeci.username  
+    
+
+      
         
     
     

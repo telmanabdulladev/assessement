@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static  # why we imported static
 from django.conf import settings
+from a_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('a_app.urls')),    
+    path('app/', include('a_app.urls')), 
+    path('api-auth/', include('rest_framework.urls')), 
+    path('api/app/', include('a_app.api.urls')),  
+    path('',views.index,name='index'),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 

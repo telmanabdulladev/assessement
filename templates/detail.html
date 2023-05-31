@@ -13,7 +13,9 @@ Detail
         <ul style="list-style-type: none;">
            
             <li>
+             {% if resource.file %}
             <a href="{{ resource.file.url }}">{{resource.file.url}}</a> 
+             {% endif %}
             </li>
             
            
